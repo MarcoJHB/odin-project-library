@@ -49,14 +49,14 @@ for (let i = 0; i < myLibrary.length; i++) {
   bookContainer.appendChild(card);
   console.log("card created!");
 
+  const bookDetails = document.createElement("div");
+  bookDetails.classList.add("book-details");
   const bookCover = document.createElement("img");
   const bookCoverURL = myLibrary[i].url;
   bookCover.src = bookCoverURL;
-  card.appendChild(bookCover);
+  bookDetails.appendChild(bookCover);
   console.log("cover created!");
 
-  const bookDetails = document.createElement("div");
-  bookDetails.classList.add("book-details");
   card.appendChild(bookDetails);
   bookDetails.appendChild(bookTitle);
   console.log("details created!");
@@ -101,7 +101,6 @@ function bookInfo() {
   return newTitle, newUrl, newAuthor, newPages, newRead, newBook;
 }
 
-
 // Search for title
 
 const form = document.querySelector("#searchForm");
@@ -116,7 +115,7 @@ form.addEventListener("submit", async function (e) {
   container.innerHTML = "";
   console.log("JSON data from API ==>", res.data.items[0].volumeInfo.title);
   console.log(readStatus);
-  makeImages(res.data,readStatus);
+  makeImages(res.data, readStatus);
   form.elements.query.value = "";
 });
 
@@ -133,11 +132,9 @@ form.addEventListener("submit", async function (e) {
 //     }
 // }
 
-
-const makeImages = (books,readStatus) => {
+const makeImages = (books, readStatus) => {
   // create for of loop to find every result
   for (let i = 0; i < 1; i++) {
-
     let bookTitle = document.createElement("div");
     bookTitle.textContent = books.items[i].volumeInfo.title;
     bookTitle.classList.add("book-title");
@@ -148,14 +145,14 @@ const makeImages = (books,readStatus) => {
     bookContainer.appendChild(card);
     console.log("card created!");
 
+    const bookDetails = document.createElement("div");
+    bookDetails.classList.add("book-details");
+
     let bookCover = document.createElement("img");
     bookCover.src = books.items[i].volumeInfo.imageLinks.thumbnail;
     bookCover.style.width = "100%";
-    card.appendChild(bookCover);
+    bookDetails.appendChild(bookCover);
     console.log("cover created!");
-
-    const bookDetails = document.createElement("div");
-    bookDetails.classList.add("book-details");
     card.appendChild(bookDetails);
     bookDetails.appendChild(bookTitle);
     console.log("details created!");
